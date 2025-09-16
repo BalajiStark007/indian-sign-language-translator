@@ -4,3 +4,4 @@ matplotlib
 Pillow
 easygui
 rapidfuzz
+pyaudio
