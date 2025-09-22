@@ -1,0 +1,7 @@
+SpeechRecognition
+numpy
+matplotlib
+Pillow
+easygui
+rapidfuzz
+pyaudio
