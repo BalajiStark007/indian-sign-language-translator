@@ -4,12 +4,21 @@ import shutil
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from translator import translate_audio
 from renderer import get_gif_url, letters_sequence
 from text_module import preprocess_text, best_match
 
 app = FastAPI(title="Speech-to-Sign API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # or ["*"] for dev
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 BASE_DIR = os.path.dirname(__file__)
 ASSETS_DIR = os.path.normpath(os.path.join(BASE_DIR, "..", "assets"))

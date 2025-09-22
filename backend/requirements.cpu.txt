@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+gunicorn
+python-multipart
+pydantic
+sentence-transformers
+torch==2.2.0
+torchvision==0.17.0
+torchaudio==2.2.0
+rapidfuzz
+numpy
+Pillow
+whisper
+vosk
+soundfile
+aiofiles
+python-magic

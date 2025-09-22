@@ -1,0 +1,25 @@
+FROM nvidia/cuda:12.1.1-runtime-ubuntu22.04 AS backend
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    ffmpeg build-essential git wget curl python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.gpu.txt /app/backend/requirements.txt
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
+
+FROM node:18 AS frontend
+WORKDIR /frontend
+COPY frontend/react_app/package.json frontend/react_app/package-lock.json ./
+RUN npm install
+COPY frontend/react_app/ ./
+RUN npm run build
+
+FROM backend AS final
+WORKDIR /app
+COPY backend/ /app/
+COPY --from=frontend /frontend/build /app/frontend/react_app/build
+COPY assets/ /app/assets/
+EXPOSE 8000
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "api:app", "--bind", "0.0.0.0:8000", "--workers", "2"]

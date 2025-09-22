@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  speech-to-sign:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./assets:/app/assets
+    profiles: ["cpu"]
+
+  speech-to-sign-gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.gpu
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./assets:/app/assets
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    profiles: ["gpu"]
