@@ -1,0 +1,10 @@
+{
+    "stt_engine": "whisper",
+    "whisper_model": "small",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "fuzzy_threshold": 80,
+    "embedding_threshold": 0.65,
+    "isl_phrases_path": "isl_phrases.json",
+    "gifs_path": "../assets/ISL_Gifs",
+    "letters_path": "../assets/letters"
+}
