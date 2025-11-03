@@ -1,46 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 export default function SignPlayer({ render }) {
-    const [index, setIndex] = useState(0);
-
-    useEffect(() => {
-        if (render?.type === "letters" && render.urls?.length) {
-            const interval = setInterval(() => {
-                setIndex((prev) => (prev + 1) % render.urls.length);
-            }, 800);
-            return () => clearInterval(interval);
-        }
-    }, [render]);
-
-    if (!render) return null;
-
-    if (render.type === "gif") {
+    if (render.gif) {
         return (
-            <div>
-                <h4 className="font-semibold">Sign (GIF):</h4>
-                <img
-                    src={render.url}
-                    alt="ISL sign"
-                    className="rounded-lg border shadow max-w-full"
-                />
+            <div className="mt-4">
+                <img src={render.gif} alt="ISL sign" className="rounded-lg shadow" />
             </div>
         );
     }
 
-    if (render.type === "letters") {
+    if (render.letters) {
         return (
-            <div>
-                <h4 className="font-semibold">Spelled Letters:</h4>
-                {render.urls?.length > 0 && (
-                    <img
-                        src={render.urls[index]}
-                        alt="letter"
-                        className="w-24 h-24 border rounded-lg shadow"
-                    />
-                )}
+            <div className="flex flex-wrap gap-2 mt-4 justify-center">
+                {render.letters.map((u, i) => (
+                    <img key={i} src={u} alt={`letter-${i}`} className="w-12 h-12" />
+                ))}
             </div>
         );
     }
 
-    return <p className="italic text-gray-600">No matching sign found.</p>;
+    return <p>No matching sign found.</p>;
 }
