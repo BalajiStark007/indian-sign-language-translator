@@ -7,8 +7,9 @@ sentence-transformers
 torch
 rapidfuzz
 numpy
+openai-whisper
+ffmpeg-python
 Pillow
-whisper
 vosk
 soundfile
 aiofiles
