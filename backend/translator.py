@@ -1,6 +1,6 @@
 import os, json
-from .speech_module import transcribe_file
-from .text_module import best_match, preprocess
+from backend.speech_module import transcribe_file
+from backend.text_module import best_match, preprocess
 
 BASE_DIR = os.path.dirname(__file__)
 CONFIG = json.load(open(os.path.join(BASE_DIR, "config.json"), "r", encoding="utf-8"))

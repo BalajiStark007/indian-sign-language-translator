@@ -2,13 +2,23 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 import shutil, os
-from translator import translate_audio
+from backend.translator import translate_audio
+from fastapi.middleware.cors import CORSMiddleware
+
 
 BASE_DIR = os.path.dirname(__file__)
 ASSETS = os.path.normpath(os.path.join(BASE_DIR, "..", "assets"))
 FRONTEND_BUILD = os.path.normpath(os.path.join(BASE_DIR, "..", "frontend", "react_app", "build"))
 
 app = FastAPI(title="Speech to ISL Translator")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or your frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.mount("/static/gifs", StaticFiles(directory=os.path.join(ASSETS, "ISL_Gifs")), name="gifs")
 app.mount("/static/letters", StaticFiles(directory=os.path.join(ASSETS, "letters")), name="letters")

@@ -13,3 +13,4 @@ vosk
 soundfile
 aiofiles
 python-magic
+SpeechRecognition
