@@ -8,7 +8,7 @@ echo "🟩 Installing dependencies..."
 sudo apt install -y python3-pip python3-venv npm ffmpeg git tmux
 
 echo "🟦 Setting up Python environment..."
-cd ~/speech_to_sign/backend
+cd ~/indian-sign-language-translator/backend
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
@@ -31,4 +31,4 @@ echo "🟩 Starting FastAPI..."
 tmux new-session -d -s speechapp "source venv/bin/activate && uvicorn api:app --host 0.0.0.0 --port 8000"
 
 echo "✅ Application deployed!"
-echo "Visit http://<your-ec2-ip>:8000"
+echo "Visit http://44.223.33.7:8000"
