@@ -50,6 +50,7 @@ echo "=============================="
 cd $FRONTEND_DIR
 npm install
 npm audit fix --force || true
+sudo npm install framer-motion lottie-react react-spinners react-icons react-audio-visualize
 sudo npm install -g react-scripts
 sudo npm run build
 
